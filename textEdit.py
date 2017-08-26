@@ -101,7 +101,5 @@ textWidget.pack(expand=True,fill=Tk.BOTH)
 textWidget.config(yscrollcommand=scrollbar.set)
 scrollbar.config(command=textWidget.yview)
 
-#### COMMIT TEST
-### COMMIT TEST 2
 # Start the main event loop (i.e. run the tkinter program)
 app.mainloop()
