@@ -30,18 +30,21 @@ def on_save_as():
     print "Not implemented"
 
 
-def get_all_text():
+def get_all_text(app, event=None):
     # returns all text in the text box
     # should be one line of code
     # not neccessary but may make the code in other places nicer
-    print "Not implemented"
 
+    input=textWidget.get(1.0, Tk.END) # Stores all the data in textWidget to input
 
-def delete_all_text():
+def paste_from_input():
+    print "NOT IMPLEMENTED"
+
+def delete_all_text(event=None):
     # deletes all text in the text box
     # should be one line of code
     # not neccessary but may make the code in other places nicer
-    print "Not implemented"
+    textWidget.delete(1.0, Tk.END)
 
 
 def save_file(save_path, text):
@@ -55,7 +58,6 @@ def read_file(file_path):
     # open file in file_path
     # return the text
     print "Not implemented"
-
 
 
 # Initialize application
@@ -85,8 +87,9 @@ menu_bar.add_cascade(label="File2", menu=filemenu)
 filemenu.add_command(label="Exit", command=exit)
 
 # BUTTON EXAMPLE
-button = Tk.Button(app, text="Exit", command=quit)
+button = Tk.Button(app, text="Exit", command=exit)
 button.pack(side=Tk.BOTTOM, fill=Tk.X)
+
 
 # SCROLLBAR
 scrollbar = Tk.Scrollbar(app)
@@ -96,10 +99,21 @@ scrollbar.pack(side=Tk.RIGHT, fill= Tk.Y)
 textWidget = Tk.Text(app)
 textWidget.pack(expand=True,fill=Tk.BOTH)
 
+#BUTTONS FOR CONTROLLING TEXTWIDGET
+removeAllText=Tk.Button(app, text="CLICK ME", command=delete_all_text)
+removeAllText.pack(side=Tk.TOP, fill=Tk.X)
+
 
 #setting connection between scrollbar and widget
 textWidget.config(yscrollcommand=scrollbar.set)
 scrollbar.config(command=textWidget.yview)
 
+#BINDS
+app.bind('<Control-d>',delete_all_text)
+app.bind('<Control-c>',get_all_text,paste_from_input)
+
 # Start the main event loop (i.e. run the tkinter program)
 app.mainloop()
+
+
+#JohEker: added button to delete all text in textWidget (delete_all_text), also a Ctrl+D bind to the same action. Ctrl-C to get all text i textWidget (get_all_text)
